@@ -1,0 +1,209 @@
+<ul class="tabs">
+	<li id="tab-1" class="tab-header active">Sample text</li>
+	<li id="tab-2" class="tab-header">Glyps</li>
+</ul>
+<div id="tab-1-pane" class="tab-pane active">
+	<div class="customfont sample-text" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque congue lorem. Quisque vel sodales leo. Etiam adipiscing, nisi in tempor bibendum, turpis diam commodo neque, sit amet faucibus diam nibh ut purus. Quisque bibendum vehicula ante. Curabitur tellus leo, congue in venenatis et, porttitor vitae ligula. Donec at turpis mauris. Fusce ullamcorper rutrum tempus. Nulla mollis sem sed felis elementum sed laoreet neque malesuada. Aenean sit amet condimentum est. Suspendisse quis nulla eget lectus bibendum convallis in ac libero. Nulla auctor lorem elit, vel pretium magna. Aenean iaculis, sem scelerisque porta mollis, felis enim volutpat nisl, in congue dolor sapien pulvinar tortor. Nulla purus ante, volutpat vitae fringilla et, dignissim sed tellus. Quisque facilisis elit at nisl consectetur a viverra risus rhoncus. In ut neque sit amet magna mollis euismod. Etiam pharetra sapien at erat sagittis condimentum.</div>
+</div>
+<div id="tab-2-pane" class="tab-pane">
+	<select id="select-range">
+		<option value="" selected="selected">--- Unicode ranges ---</option>
+		<option value="0020-007F">Basic Latin</option>
+		<option value="00A0-00FF">Latin-1 Supplement</option>
+		<option value="0100-017F">Latin Extended-A</option>
+		<option value="0180-024F">Latin Extended-B</option>
+		<option value="0250-02AF">IPA Extensions</option>
+		<option value="02B0-02FF">Spacing Modifier Letters</option>
+		<option value="0300-036F">Combining Diacritical Marks</option>
+		<option value="0370-03FF">Greek and Coptic</option>
+		<option value="0400-04FF">Cyrillic</option>
+		<option value="0500-052F">Cyrillic Supplementary</option>
+		<option value="0530-058F">Armenian</option>
+		<option value="0590-05FF">Hebrew</option>
+		<option value="0600-06FF">Arabic</option>
+		<option value="0700-074F">Syriac</option>
+		<option value="0780-07BF">Thaana</option>
+		<option value="0900-097F">Devanagari</option>
+		<option value="0980-09FF">Bengali</option>
+		<option value="0A00-0A7F">Gurmukhi</option>
+		<option value="0A80-0AFF">Gujarati</option>
+		<option value="0B00-0B7F">Oriya</option>
+		<option value="0B80-0BFF">Tamil</option>
+		<option value="0C00-0C7F">Telugu</option>
+		<option value="0C80-0CFF">Kannada</option>
+		<option value="0D00-0D7F">Malayalam</option>
+		<option value="0D80-0DFF">Sinhala</option>
+		<option value="0E00-0E7F">Thai</option>
+		<option value="0E80-0EFF">Lao</option>
+		<option value="0F00-0FFF">Tibetan</option>
+		<option value="1000-109F">Myanmar</option>
+		<option value="10A0-10FF">Georgian</option>
+		<option value="1100-11FF">Hangul Jamo</option>
+		<option value="1200-137F">Ethiopic</option>
+		<option value="13A0-13FF">Cherokee</option>
+		<option value="1400-167F">Unified Canadian Aboriginal Syllabics</option>
+		<option value="1680-169F">Ogham</option>
+		<option value="16A0-16FF">Runic</option>
+		<option value="1700-171F">Tagalog</option>
+		<option value="1720-173F">Hanunoo</option>
+		<option value="1740-175F">Buhid</option>
+		<option value="1760-177F">Tagbanwa</option>
+		<option value="1780-17FF">Khmer</option>
+		<option value="1800-18AF">Mongolian</option>
+		<option value="1900-194F">Limbu</option>
+		<option value="1950-197F">Tai Le</option>
+		<option value="19E0-19FF">Khmer Symbols</option>
+		<option value="1D00-1D7F">Phonetic Extensions</option>
+		<option value="1E00-1EFF">Latin Extended Additional</option>
+		<option value="1F00-1FFF">Greek Extended</option>
+		<option value="2000-206F">General Punctuation</option>
+		<option value="2070-209F">Superscripts and Subscripts</option>
+		<option value="20A0-20CF">Currency Symbols</option>
+		<option value="20D0-20FF">Combining Diacritical Marks for Symbols</option>
+		<option value="2100-214F">Letterlike Symbols</option>
+		<option value="2150-218F">Number Forms</option>
+		<option value="2190-21FF">Arrows</option>
+		<option value="2200-22FF">Mathematical Operators</option>
+		<option value="2300-23FF">Miscellaneous Technical</option>
+		<option value="2400-243F">Control Pictures</option>
+		<option value="2440-245F">Optical Character Recognition</option>
+		<option value="2460-24FF">Enclosed Alphanumerics</option>
+		<option value="2500-257F">Box Drawing</option>
+		<option value="2580-259F">Block Elements</option>
+		<option value="25A0-25FF">Geometric Shapes</option>
+		<option value="2600-26FF">Miscellaneous Symbols</option>
+		<option value="2700-27BF">Dingbats</option>
+		<option value="27C0-27EF">Miscellaneous Mathematical Symbols-A</option>
+		<option value="27F0-27FF">Supplemental Arrows-A</option>
+		<option value="2800-28FF">Braille Patterns</option>
+		<option value="2900-297F">Supplemental Arrows-B</option>
+		<option value="2980-29FF">Miscellaneous Mathematical Symbols-B</option>
+		<option value="2A00-2AFF">Supplemental Mathematical Operators</option>
+		<option value="2B00-2BFF">Miscellaneous Symbols and Arrows</option>
+		<option value="2E80-2EFF">CJK Radicals Supplement</option>
+		<option value="2F00-2FDF">Kangxi Radicals</option>
+		<option value="2FF0-2FFF">Ideographic Description Characters</option>
+		<option value="3000-303F">CJK Symbols and Punctuation</option>
+		<option value="3040-309F">Hiragana</option>
+		<option value="30A0-30FF">Katakana</option>
+		<option value="3100-312F">Bopomofo</option>
+		<option value="3130-318F">Hangul Compatibility Jamo</option>
+		<option value="3190-319F">Kanbun</option>
+		<option value="31A0-31BF">Bopomofo Extended</option>
+		<option value="31F0-31FF">Katakana Phonetic Extensions</option>
+		<option value="3200-32FF">Enclosed CJK Letters and Months</option>
+		<option value="3300-33FF">CJK Compatibility</option>
+		<option value="3400-4DBF">CJK Unified Ideographs Extension A</option>
+		<option value="4DC0-4DFF">Yijing Hexagram Symbols</option>
+		<option value="4E00-9FFF">CJK Unified Ideographs</option>
+		<option value="A000-A48F">Yi Syllables</option>
+		<option value="A490-A4CF">Yi Radicals</option>
+		<option value="AC00-D7AF">Hangul Syllables</option>
+		<option value="D800-DB7F">High Surrogates</option>
+		<option value="DB80-DBFF">High Private Use Surrogates</option>
+		<option value="DC00-DFFF">Low Surrogates</option>
+		<option value="E000-F8FF">Private Use Area</option>
+		<option value="F900-FAFF">CJK Compatibility Ideographs</option>
+		<option value="FB00-FB4F">Alphabetic Presentation Forms</option>
+		<option value="FB50-FDFF">Arabic Presentation Forms-A</option>
+		<option value="FE00-FE0F">Variation Selectors</option>
+		<option value="FE20-FE2F">Combining Half Marks</option>
+		<option value="FE30-FE4F">CJK Compatibility Forms</option>
+		<option value="FE50-FE6F">Small Form Variants</option>
+		<option value="FE70-FEFF">Arabic Presentation Forms-B</option>
+		<option value="FF00-FFEF">Halfwidth and Fullwidth Forms</option>
+		<option value="FFF0-FFFF">Specials</option>
+		<option value="10000-1007F">Linear B Syllabary</option>
+		<option value="10080-100FF">Linear B Ideograms</option>
+		<option value="10100-1013F">Aegean Numbers</option>
+		<option value="10300-1032F">Old Italic</option>
+		<option value="10330-1034F">Gothic</option>
+		<option value="10380-1039F">Ugaritic</option>
+		<option value="10400-1044F">Deseret</option>
+		<option value="10450-1047F">Shavian</option>
+		<option value="10480-104AF">Osmanya</option>
+		<option value="10800-1083F">Cypriot Syllabary</option>
+		<option value="1D000-1D0FF">Byzantine Musical Symbols</option>
+		<option value="1D100-1D1FF">Musical Symbols</option>
+		<option value="1D300-1D35F">Tai Xuan Jing Symbols</option>
+		<option value="1D400-1D7FF">Mathematical Alphanumeric Symbols</option>
+		<option value="20000-2A6DF">CJK Unified Ideographs Extension B</option>
+		<option value="2F800-2FA1F">CJK Compatibility Ideographs Supplement</option>
+		<option value="E0000-E007F">Tags</option>
+	</select>
+	<div id="charmap" class="customfont">
+	</div>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+var charmapDIV = document.getElementById('charmap'),
+	dropdown = document.getElementById('select-range'),
+	tabHeaders = document.getElementsByClassName('tab-header'),
+	tabPanes = document.getElementsByClassName('tab-pane');
+
+var cellHTML = function(num){
+	//hexCode =
+	var decCode,
+		hexCode;
+
+	hexCode = zeroFill(num.toString(16), 4);
+	decCode = zeroFill(num, 4);
+
+	return '<div class="cell"><span class="char customfont">&#x' + hexCode + ';</span><span class="dec">&amp;#' + decCode + ';</span><span class="hex">&amp;#x' + hexCode + ';</span></div>';
+
+};
+
+var zeroFill = function(num, width){
+	width -= num.toString().length;
+
+	if(width > 0){
+		return new Array(width + (/\./.test(num) ? 2 : 1) ).join('0') + num;
+	}
+
+	return num + '';
+};
+
+var drawRange = function(from, to){
+	var html = '';
+
+	for(var i = from; i <= to; i++){
+		html += cellHTML(i);
+	}
+
+	charmapDIV.innerHTML = html;
+};
+
+var onTabHeaderClick = function(event){
+
+	for(var i = 0, l = tabHeaders.length; i < l; i++){
+		tabHeaders[i].className = 'tab-header';
+		tabPanes[i].className = 'tab-pane';
+	}
+
+	event.target.className = 'tab-header active';
+	document.getElementById(event.target.id + '-pane').className = 'tab-pane active';
+};
+
+dropdown.addEventListener('change', function(event){
+	var vals,
+		parts;
+
+	val = dropdown.options[dropdown.selectedIndex].value;
+
+	if(val != ''){
+		parts = val.split('-');
+
+		drawRange(Number('0x' + parts[0]), Number('0x' + parts[1]));
+	}else{
+		charmapDIV.innerHTML = '';
+	}
+}, false);
+
+for(var i = 0, l = tabHeaders.length; i < l; i++){
+	tabHeaders[i].addEventListener('click', onTabHeaderClick, false);
+}
+
+
+</script>
