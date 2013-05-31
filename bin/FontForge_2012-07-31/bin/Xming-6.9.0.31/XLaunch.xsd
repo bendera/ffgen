@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!-- XLaunch.xsd -->
+<!-- File version 6.9.0.25 -->
+<!-- Copyright (c) 2006-2007 Colin Harrison -->
+<xs:schema
+  xmlns:tns="http://www.straightrunning.com/XmingNotes"
+  attributeFormDefault="unqualified" elementFormDefault="qualified"
+  targetNamespace="http://www.straightrunning.com/XmingNotes"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="XLaunch">
+    <xs:complexType>
+      <xs:attribute name="WindowMode" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="MultiWindow"/>
+            <xs:enumeration value="Fullscreen"/>
+            <xs:enumeration value="Windowed"/>
+            <xs:enumeration value="Nodecoration"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ClientMode" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="NoClient"/>
+            <xs:enumeration value="StartProgram"/>
+            <xs:enumeration value="XDMCP"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ClientStart">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Local"/>
+            <xs:enumeration value="PuTTY"/>
+            <xs:enumeration value="OpenSSH"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Display" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="59535"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <!-- Program is the X client that is actually started -->
+      <xs:attribute name="Program" type="xs:string"/>
+      <!-- Program1="a" to Program10="j" are 'Start program' chooser entries  -->
+      <xs:attribute name="Program1" type="xs:string"/>
+      <xs:attribute name="Program2" type="xs:string"/>
+      <xs:attribute name="Program3" type="xs:string"/>
+      <xs:attribute name="Program4" type="xs:string"/>
+      <xs:attribute name="Program5" type="xs:string"/>
+      <xs:attribute name="Program6" type="xs:string"/>
+      <xs:attribute name="Program7" type="xs:string"/>
+      <xs:attribute name="Program8" type="xs:string"/>
+      <xs:attribute name="Program9" type="xs:string"/>
+      <xs:attribute name="Program10" type="xs:string"/>
+      <!-- Directory path to either plink.exe or ssh.exe in the form PathToProtocol="C:\\cygwin\\bin\\" -->
+      <xs:attribute name="PathToProtocol" type="xs:string"/>
+      <xs:attribute name="Compress" type="xs:boolean"/>
+      <xs:attribute name="RemoteHost" type="xs:string"/>
+      <xs:attribute name="RemoteUser" type="xs:string"/>
+      <xs:attribute name="PW" type="xs:string"/>
+      <xs:attribute name="PasswordStart" type="xs:boolean"/>
+      <xs:attribute name="XDMCPHost" type="xs:string"/>
+      <xs:attribute name="XDMCPBroadcast" type="xs:boolean"/>
+      <xs:attribute name="XDMCPIndirect" type="xs:boolean"/>
+      <xs:attribute name="Clipboard" type="xs:boolean" use="required"/>
+      <xs:attribute name="NoAccessControl" type="xs:boolean"/>
+      <xs:attribute name="FontServer" type="xs:string"/>
+      <xs:attribute name="ExtraParams" type="xs:string"/>
+      <xs:attribute name="ExtraSSH" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
