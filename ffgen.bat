@@ -39,7 +39,7 @@ if exist %WORKDIR%%DIRNAME% (
 mkdir %WORKDIR%%DIRNAME%
 
 rem ############################################################################
-rem svg and ttf font file generation with FontForge:
+rem svg, ttf, woff file generation with FontForge:
 rem ############################################################################
 
 set FF=%~dp0bin\FontForge_2012-07-31
@@ -56,24 +56,15 @@ start /B "" "%FF%\bin\Xming-6.9.0.31\Xming.exe" :9 -multiwindow -clipboard -sile
 
 if %EXT% == .ttf (
 	echo [ffgen] Generate "%FONTNAME%.svg"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg
+	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.woff
 	echo [ffgen] Copy "%FULLPATH%" to "%WORKDIR%%DIRNAME%\%FONTNAME%.ttf"
 	copy %FULLPATH% %WORKDIR%%DIRNAME%\%FONTNAME%.ttf
 ) else (
 	echo [ffgen] Generate "%FONTNAME%.svg %FONTNAME%.ttf"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.ttf
+	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.ttf %FONTNAME%.woff
 )
 
 "%FF%\bin\Xming_close.exe" -close
-
-rem ############################################################################
-rem woff font file generation
-rem ############################################################################
-
-echo [ffgen] Generate "%BASENAME%.woff"
-%FFGENDIR%bin\sfnt2woff.exe %FULLPATH%
-echo [ffgen] Move "%WORKDIR%%BASENAME%.woff" to "%WORKDIR%%DIRNAME%\%FONTNAME%.woff"
-move %WORKDIR%%BASENAME%.woff %WORKDIR%%DIRNAME%\%FONTNAME%.woff
 
 rem ############################################################################
 rem eot font file generation
