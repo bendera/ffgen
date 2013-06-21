@@ -2,6 +2,14 @@
 
 Simple batch file for various open source tools.
 
+Included tools:
+
+* [ttf2eot][]
+* [FontForge][]
+
+[ttf2eot]: https://code.google.com/p/ttf2eot/
+[FontForge]: http://fontforge.org/
+
 ## Installation
 
 1. [Download][] and unpack it.
