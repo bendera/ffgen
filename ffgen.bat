@@ -24,6 +24,11 @@ if not exist %1 (
 	goto End
 )
 
+if exist %1\NUL (
+	echo "%1" is a directory
+	goto End
+)
+
 if "%2" == "" (
 	set FONTNAME=%BASENAME%
 ) else (
