@@ -3,7 +3,8 @@
 	<li id="tab-2" class="tab-header">Glyps</li>
 </ul>
 <div id="tab-1-pane" class="tab-pane active">
-	<div class="customfont sample-text" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque congue lorem. Quisque vel sodales leo. Etiam adipiscing, nisi in tempor bibendum, turpis diam commodo neque, sit amet faucibus diam nibh ut purus. Quisque bibendum vehicula ante. Curabitur tellus leo, congue in venenatis et, porttitor vitae ligula. Donec at turpis mauris. Fusce ullamcorper rutrum tempus. Nulla mollis sem sed felis elementum sed laoreet neque malesuada. Aenean sit amet condimentum est. Suspendisse quis nulla eget lectus bibendum convallis in ac libero. Nulla auctor lorem elit, vel pretium magna. Aenean iaculis, sem scelerisque porta mollis, felis enim volutpat nisl, in congue dolor sapien pulvinar tortor. Nulla purus ante, volutpat vitae fringilla et, dignissim sed tellus. Quisque facilisis elit at nisl consectetur a viverra risus rhoncus. In ut neque sit amet magna mollis euismod. Etiam pharetra sapien at erat sagittis condimentum.</div>
+	<div class="change-size"><label for="fontsize">Font size:</label><input type="number" value="16" min="1" id="fontsize"></div>
+	<div id="sample-text" class="customfont sample-text" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque congue lorem. Quisque vel sodales leo. Etiam adipiscing, nisi in tempor bibendum, turpis diam commodo neque, sit amet faucibus diam nibh ut purus. Quisque bibendum vehicula ante. Curabitur tellus leo, congue in venenatis et, porttitor vitae ligula. Donec at turpis mauris. Fusce ullamcorper rutrum tempus. Nulla mollis sem sed felis elementum sed laoreet neque malesuada. Aenean sit amet condimentum est. Suspendisse quis nulla eget lectus bibendum convallis in ac libero. Nulla auctor lorem elit, vel pretium magna. Aenean iaculis, sem scelerisque porta mollis, felis enim volutpat nisl, in congue dolor sapien pulvinar tortor. Nulla purus ante, volutpat vitae fringilla et, dignissim sed tellus. Quisque facilisis elit at nisl consectetur a viverra risus rhoncus. In ut neque sit amet magna mollis euismod. Etiam pharetra sapien at erat sagittis condimentum.</div>
 </div>
 <div id="tab-2-pane" class="tab-pane">
 	<select id="select-range">
@@ -141,7 +142,9 @@
 var charmapDIV = document.getElementById('charmap'),
 	dropdown = document.getElementById('select-range'),
 	tabHeaders = document.getElementsByClassName('tab-header'),
-	tabPanes = document.getElementsByClassName('tab-pane');
+	tabPanes = document.getElementsByClassName('tab-pane'),
+	stepper = document.getElementById('fontsize'),
+	sampleText = document.getElementById('sample-text');
 
 var cellHTML = function(num){
 	//hexCode =
@@ -199,6 +202,10 @@ dropdown.addEventListener('change', function(event){
 	}else{
 		charmapDIV.innerHTML = '';
 	}
+}, false);
+
+stepper.addEventListener('change', function(event){
+	sampleText.style.fontSize = stepper.value + "px";
 }, false);
 
 for(var i = 0, l = tabHeaders.length; i < l; i++){
