@@ -147,7 +147,6 @@ var charmapDIV = document.getElementById('charmap'),
 	sampleText = document.getElementById('sample-text');
 
 var cellHTML = function(num){
-	//hexCode =
 	var decCode,
 		hexCode;
 
@@ -179,7 +178,6 @@ var drawRange = function(from, to){
 };
 
 var onTabHeaderClick = function(event){
-
 	for(var i = 0, l = tabHeaders.length; i < l; i++){
 		tabHeaders[i].className = 'tab-header';
 		tabPanes[i].className = 'tab-pane';
@@ -190,7 +188,7 @@ var onTabHeaderClick = function(event){
 };
 
 dropdown.addEventListener('change', function(event){
-	var vals,
+	var val,
 		parts;
 
 	val = dropdown.options[dropdown.selectedIndex].value;
@@ -211,6 +209,5 @@ stepper.addEventListener('change', function(event){
 for(var i = 0, l = tabHeaders.length; i < l; i++){
 	tabHeaders[i].addEventListener('click', onTabHeaderClick, false);
 }
-
 
 </script>
