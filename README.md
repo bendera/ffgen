@@ -19,7 +19,7 @@ Included tools:
 ## Usage
 
 ```
-ffgen filename [css font-family name]
+ffgen filename [--fontname <css font-family name>]
 ```
 
 [PATH]: http://superuser.com/a/284351
