@@ -7,6 +7,8 @@ set CSSNAME=stylesheet.css
 set WORKDIR=%~d1%~p1
 set FFGENDIR=%~dp0
 
+set FONTNAME=%BASENAME%
+
 rem echo EXT: %EXT%
 rem echo BASENAME: %BASENAME%
 rem echo FULLPATH: %FULLPATH%
@@ -29,10 +31,20 @@ if exist %1\NUL (
 	goto End
 )
 
-if "%2" == "" (
-	set FONTNAME=%BASENAME%
-) else (
-	set FONTNAME=%2
+rem Parse optional arguments
+:loop
+IF NOT "%2"=="" (
+	rem Not implemented yet. Stay tuned... ;)
+    IF "%2"=="--subsetting" (
+        SET SUBSETTING=%3
+        SHIFT
+    )
+    IF "%2"=="--fontname" (
+        SET FONTNAME=%3
+        SHIFT
+    )
+    SHIFT
+    GOTO :loop
 )
 
 set DIRNAME=%FONTNAME%
@@ -47,7 +59,7 @@ rem ############################################################################
 rem svg, ttf, woff file generation with FontForge:
 rem ############################################################################
 
-set FF=%~dp0bin\FontForge_2012-07-31
+set FF=%FFGENDIR%bin\FontForge_2012-07-31
 set PATH=%FF%\bin;%FF%\bin\Xming-6.9.0.31;%PATH%
 
 set DISPLAY=:9.0
