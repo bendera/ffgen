@@ -6,6 +6,7 @@ set FULLPATH=%~f1
 set CSSNAME=stylesheet.css
 set WORKDIR=%~d1%~p1
 set FFGENDIR=%~dp0
+set SUBSET=-1
 
 set FONTNAME=%BASENAME%
 
@@ -38,9 +39,8 @@ copy %FULLPATH% %TMPFONT%
 rem Parse optional arguments
 :loop
 IF NOT "%2"=="" (
-	rem Not implemented yet. Stay tuned... ;)
-    IF "%2"=="--subsetting" (
-        SET SUBSETTING=%3
+    IF "%2"=="--subset" (
+        SET SUBSET=%3
         SHIFT
     )
     IF "%2"=="--fontname" (
@@ -50,6 +50,25 @@ IF NOT "%2"=="" (
     SHIFT
     GOTO :loop
 )
+
+if not %SUBSET%==-1 (
+	if exist %FFGENDIR%subsets\%SUBSET% (
+		set SUBSET=%FFGENDIR%subsets\%SUBSET%
+		goto subset_initialized
+	)
+	if exist %WORKDIR%%SUBSET% (
+		set SUBSET=%WORKDIR%%SUBSET%
+		goto subset_initialized
+	)
+	if exist %SUBSET% (
+		set SUBSET=%SUBSET%
+		goto subset_initialized
+	)
+	echo [ffgen] Subset file not found.
+	goto End
+)
+
+:subset_initialized
 
 set DIRNAME=%FONTNAME%
 
@@ -75,15 +94,8 @@ start /B "" "%FF%\bin\Xming-6.9.0.31\Xming.exe" :9 -multiwindow -clipboard -sile
 
 "%FF%\bin\Xming_close.exe" -wait
 
-if %EXT% == .ttf (
-	echo [ffgen] Generate "%FONTNAME%.svg"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %TMPFONT% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.woff
-	echo [ffgen] Copy "%TMPFONT%" to "%WORKDIR%%DIRNAME%\%FONTNAME%.ttf"
-	copy %TMPFONT% %WORKDIR%%DIRNAME%\%FONTNAME%.ttf
-) else (
-	echo [ffgen] Generate "%FONTNAME%.svg %FONTNAME%.ttf"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %TMPFONT% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.ttf %FONTNAME%.woff
-)
+echo [ffgen] Generate "%FONTNAME%.svg %FONTNAME%.ttf %FONTNAME%.woff"
+"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %TMPFONT% %WORKDIR%%DIRNAME% %FONTNAME% %SUBSET%
 
 "%FF%\bin\Xming_close.exe" -close
 
@@ -92,7 +104,7 @@ rem eot font file generation
 rem ############################################################################
 
 echo [ffgen] Generate "%FONTNAME%.eot"
-%FFGENDIR%bin\ttf2eot.exe %FULLPATH% > %WORKDIR%%DIRNAME%\%FONTNAME%.eot
+%FFGENDIR%bin\ttf2eot.exe %WORKDIR%%DIRNAME%\%FONTNAME%.ttf > %WORKDIR%%DIRNAME%\%FONTNAME%.eot
 
 rem ############################################################################
 rem css, html file generation

@@ -1,13 +1,12 @@
 input_file = $argv[1]
 target_dir = $argv[2]
+fontname = $argv[3]
 BACKSLASH = Chr(92)
 
 Open(input_file, 1)
 
-i = 3
-while(i < $argc)
-	Generate(target_dir + BACKSLASH + $argv[i])
-	i = i + 1
-endloop
+Generate(target_dir + BACKSLASH + fontname + '.svg')
+Generate(target_dir + BACKSLASH + fontname + '.ttf')
+Generate(target_dir + BACKSLASH + fontname + '.woff')
 
 WriteStringToFile($fontname, target_dir + BACKSLASH + "originalfontname.txt")
