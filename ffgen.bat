@@ -31,6 +31,10 @@ if exist %1\NUL (
 	goto End
 )
 
+set TMPFONT=%FULLPATH%.tmp-%RANDOM%
+
+copy %FULLPATH% %TMPFONT%
+
 rem Parse optional arguments
 :loop
 IF NOT "%2"=="" (
@@ -73,12 +77,12 @@ start /B "" "%FF%\bin\Xming-6.9.0.31\Xming.exe" :9 -multiwindow -clipboard -sile
 
 if %EXT% == .ttf (
 	echo [ffgen] Generate "%FONTNAME%.svg"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.woff
-	echo [ffgen] Copy "%FULLPATH%" to "%WORKDIR%%DIRNAME%\%FONTNAME%.ttf"
-	copy %FULLPATH% %WORKDIR%%DIRNAME%\%FONTNAME%.ttf
+	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %TMPFONT% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.woff
+	echo [ffgen] Copy "%TMPFONT%" to "%WORKDIR%%DIRNAME%\%FONTNAME%.ttf"
+	copy %TMPFONT% %WORKDIR%%DIRNAME%\%FONTNAME%.ttf
 ) else (
 	echo [ffgen] Generate "%FONTNAME%.svg %FONTNAME%.ttf"
-	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %FULLPATH% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.ttf %FONTNAME%.woff
+	"%FF%\bin\fontforge.exe" -script %FFGENDIR%bin\convert.pe %TMPFONT% %WORKDIR%%DIRNAME% %FONTNAME%.svg %FONTNAME%.ttf %FONTNAME%.woff
 )
 
 "%FF%\bin\Xming_close.exe" -close
@@ -127,3 +131,6 @@ echo ^</html^> >> %WORKDIR%%DIRNAME%\preview.html
 echo [ffgen] Done.
 
 :End
+if exist %TMPFONT% (
+	del %TMPFONT%
+)
