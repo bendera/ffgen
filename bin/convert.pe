@@ -1,9 +1,29 @@
 input_file = $argv[1]
 target_dir = $argv[2]
 fontname = $argv[3]
+subset = $argv[4]
 BACKSLASH = Chr(92)
 
 Open(input_file, 1)
+
+if(subset != '-1')
+	#http://wiki.unity3d.com/index.php?title=Create_a_new_TrueType_font_using_a_subset_of_characters_from_an_existing_TrueType_font
+
+	SelectNone()
+	subset_array = (subset)()
+	i = 0
+	l = SizeOf(subset_array)
+
+	while(i < l)
+		SelectMoreSingletons(subset_array[i])
+		i = i + 1
+	endloop
+
+	SelectInvert()
+	DetachAndRemoveGlyphs()
+	Reencode("compacted")
+
+endif
 
 Generate(target_dir + BACKSLASH + fontname + '.svg')
 Generate(target_dir + BACKSLASH + fontname + '.ttf')

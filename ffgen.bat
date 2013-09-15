@@ -52,8 +52,8 @@ IF NOT "%2"=="" (
 )
 
 if not %SUBSET%==-1 (
-	if exist %FFGENDIR%subsets\%SUBSET% (
-		set SUBSET=%FFGENDIR%subsets\%SUBSET%
+	if exist %FFGENDIR%subsets\%SUBSET%.subset (
+		set SUBSET=%FFGENDIR%subsets\%SUBSET%.subset
 		goto subset_initialized
 	)
 	if exist %WORKDIR%%SUBSET% (
