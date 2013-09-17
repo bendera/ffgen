@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: #eee;
+}
+
+.unicode-range:first-child .btn-remove {
+	display: none;
+}
+</style>
+<title>Subset generator</title>
+</head>
+
+<body>
+
+<script type="text/template" id="unicode-range-template">
+	<div class="unicode-range">
+		<label for="unicode-range-from-{{count}}">from:</label>
+		<input type="text" id="unicode-range-from-{{count}}" maxlength="4" placeholder="ex.: 0020" class="from">
+		<label for="unicode-range-to-{{count}}">to:</label>
+		<input type="text" id="unicode-range-to-{{count}}" maxlength="4" placeholder="ex.: 007f" class="to">
+		<button class="btn-remove">remove</button>
+	</div>
+</script>
+
+<fieldset>
+	<legend>Unicode range</legend>
+	<div id="unicode-ranges">
+
+	</div>
+	<button id="btn-add-range">add unicode range</button>
+</fieldset>
+
+
+<fieldset>
+	<legend>Single characters</legend>
+	<label for="single-chars-letters">Letters</label>
+	<input type="text" id="single-chars-letters" placeholder="asdf"><br>
+	<label for="single-chars-unicode">Comma separated unicode values</label>
+	<input type="text" id="single-chars-unicode" placeholder="007E,00E7,00EB">
+</fieldset>
+
+<p>Preview:</p>
+<div id="subset_preview">
+</div>
+
+<button id="btn-generate">Generate</button>
+
+<fieldset>
+	<legend>Output</legend>
+	<textarea id="output"></textarea>
+</fieldset>
+
+<script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script type="text/javascript" src="lodash.js"></script>
+<script type="text/javascript">
+
+// (function(){
+
+
+
+	var zeroFill = function(num, width){
+		width -= num.toString().length;
+
+		if(width > 0){
+			return new Array(width + (/\./.test(num) ? 2 : 1) ).join('0') + num;
+		}
+
+		return num + '';
+	};
+
+	var unicodeStrToNumber = function(str){
+		var num = Number('0x' + str);
+
+		return _.isNaN(num) ? 0 : num;
+	};
+
+	var rangeArray = function(from, to){
+		var ar = [],
+			f = unicodeStrToNumber(from),
+			t = unicodeStrToNumber(to);
+
+		for(var i = f; i <= t; i++){
+			ar.push(i);
+		}
+
+		return ar;
+	};
+
+	var addUnicodeRangeRow = function(){
+		var $wrapper = $('#unicode-ranges'),
+			$ranges = $wrapper.find('.unicode-range');
+
+		$('#unicode-ranges .unicode-range').clone();
+	};
+
+	var charToHex = function(char){
+
+	};
+
+	var arrayToSubset = function(ar){
+		var retval = '';
+
+		retval = 'return[';
+
+		for(var i = 0, l = ar.length; i < l; i++){
+			retval += '0u';
+			retval += zeroFill(ar[i].toString(16), 4)
+
+			if(i < l - 1){
+				retval += ',';
+			}
+		}
+
+		retval += ']';
+
+		return retval;
+	};
+
+	var getRanges = function(){
+		var ar = [];
+
+		$('.unicode-range').each(function(){
+			var $this = $(this),
+				$from = $this.find('.from'),
+				$to = $this.find('.to'),
+				range = [];
+
+			range = rangeArray($from.val(), $to.val());
+			ar = ar.concat(range);
+		});
+
+		return ar;
+	};
+
+	var getSingleChars = function(){
+		var chars = $('#single-chars-letters').val(),
+			retval = [];
+
+		for(var i = 0, l = chars.length; i < l; i++){
+			retval.push(chars.charCodeAt(i));
+		}
+
+		return retval;
+	};
+
+	var getSingleUnicodeValues = function(){
+		var unicodes = $('#single-chars-unicode').val().split(','),
+			retval = [];
+
+		for(var i = 0, l = unicodes.length; i < l; i++){
+			retval.push(unicodeStrToNumber(unicodes[i]));
+		}
+
+		return retval;
+	};
+
+	var parseTemplate = function(tpl, val){
+		return tpl.replace(/\{\{count\}\}/g, val);
+	};
+
+	var generatePreview = function(chars){
+		var html = '';
+
+		for(var i = 0, l = chars.length; i < l; i++){
+			html += '<span>&#' + zeroFill(chars[i], 4) + ';</span>';
+		}
+
+		$('#subset_preview').html(html);
+	};
+
+	var getInfo = function(){
+		var str = '',
+			letters = '',
+			unicode = '';
+
+		str = '# Unicode range:\r\n';
+
+		$('.unicode-range').each(function(){
+			var $this = $(this),
+				from = $this.find('.from').val(),
+				to = $this.find('.to').val();
+
+			from = from == '' ? '[not set]' : from;
+			to = to == '' ? '[not set]' : to;
+
+			str += '# ' + from + '-' + to + '\r\n';
+		});
+
+		str += '# Letters:\r\n'
+
+		letters = $('#single-chars-letters').val();
+		letters = letters == '' ? '[not set]' : letters;
+
+		str += '# ' + letters + '\r\n';
+
+		unicode = $('#single-chars-unicode').val();
+		unicode = unicode == '' ? '[not set]' : unicode;
+
+		str += '# Unicode values:\r\n'
+		str += '# ' + unicode;
+
+		str += '\r\n';
+
+		return str;
+	};
+
+	var init = function(){
+		var tpl = $('#unicode-range-template').html();
+
+		$('#unicode-ranges').append(parseTemplate(tpl, 1));
+	};
+
+	$('#unicode-ranges').on('click', '.btn-remove', function(event){
+		$(event.currentTarget).parents('.unicode-range').remove();
+	});
+
+	$('#btn-add-range').click(function(){
+		var tpl = $('#unicode-range-template').html(),
+			count = $('.unicode-range').size() + 1,
+			html = parseTemplate(tpl, count);
+
+		$('#unicode-ranges').append(html);
+	});
+
+	$('#btn-generate').click(function(event){
+		// var ar = rangeArray('0100','017F');
+		var ranges = getRanges(),
+			singleChars = getSingleChars(),
+			singleUnicodeValues = getSingleUnicodeValues(),
+			mergedArr = [],
+			subsetFile = '';
+
+		mergedArr = mergedArr.concat(ranges);
+		mergedArr = mergedArr.concat(singleChars);
+		mergedArr = mergedArr.concat(singleUnicodeValues);
+		mergedArr = mergedArr.sort();
+		mergedArr = _.unique(mergedArr);
+
+		subsetFile += getInfo();
+		subsetFile += arrayToSubset(mergedArr);
+
+		$('#output').text(subsetFile);
+
+		event.stopPropagation();
+		event.preventDefault();
+	});
+
+	init();
+
+// })(jQuery);
+
+/*var charmapDIV = document.getElementById('charmap'),
+	dropdown = document.getElementById('select-range'),
+	tabHeaders = document.getElementsByClassName('tab-header'),
+	tabPanes = document.getElementsByClassName('tab-pane'),
+	stepper = document.getElementById('fontsize'),
+	sampleText = document.getElementById('sample-text');
+
+var cellHTML = function(num){
+	var decCode,
+		hexCode;
+
+	hexCode = zeroFill(num.toString(16), 4);
+	decCode = zeroFill(num, 4);
+
+	return '<div class="cell"><span class="char customfont">&#x' + hexCode + ';</span><span class="dec">&amp;#' + decCode + ';</span><span class="hex">&amp;#x' + hexCode + ';</span></div>';
+
+};
+
+var zeroFill = function(num, width){
+	width -= num.toString().length;
+
+	if(width > 0){
+		return new Array(width + (/\./.test(num) ? 2 : 1) ).join('0') + num;
+	}
+
+	return num + '';
+};
+
+var drawRange = function(from, to){
+	var html = '';
+
+	for(var i = from; i <= to; i++){
+		html += cellHTML(i);
+	}
+
+	charmapDIV.innerHTML = html;
+};
+
+var onTabHeaderClick = function(event){
+	for(var i = 0, l = tabHeaders.length; i < l; i++){
+		tabHeaders[i].className = 'tab-header';
+		tabPanes[i].className = 'tab-pane';
+	}
+
+	event.target.className = 'tab-header active';
+	document.getElementById(event.target.id + '-pane').className = 'tab-pane active';
+};
+
+dropdown.addEventListener('change', function(event){
+	var val,
+		parts;
+
+	val = dropdown.options[dropdown.selectedIndex].value;
+
+	if(val != ''){
+		parts = val.split('-');
+
+		drawRange(Number('0x' + parts[0]), Number('0x' + parts[1]));
+	}else{
+		charmapDIV.innerHTML = '';
+	}
+}, false);
+
+stepper.addEventListener('change', function(event){
+	sampleText.style.fontSize = stepper.value + "px";
+}, false);
+
+for(var i = 0, l = tabHeaders.length; i < l; i++){
+	tabHeaders[i].addEventListener('click', onTabHeaderClick, false);
+}*/
+
+</script>
+</body>
+</html>
