@@ -62,7 +62,7 @@ body {
 
 // (function(){
 
-
+	var regexpUnicode = /[a-z0-9]{4}/;
 
 	var zeroFill = function(num, width){
 		width -= num.toString().length;
@@ -127,12 +127,14 @@ body {
 
 		$('.unicode-range').each(function(){
 			var $this = $(this),
-				$from = $this.find('.from'),
-				$to = $this.find('.to'),
+				from = $this.find('.from').val(),
+				to = $this.find('.to').val(),
 				range = [];
 
-			range = rangeArray($from.val(), $to.val());
-			ar = ar.concat(range);
+			if(regexpUnicode.test(from) && regexpUnicode.test(to)){
+				range = rangeArray(from, to);
+				ar = ar.concat(range);
+			}
 		});
 
 		return ar;
@@ -140,10 +142,13 @@ body {
 
 	var getSingleChars = function(){
 		var chars = $('#single-chars-letters').val(),
-			retval = [];
+			retval = [],
+			l = chars.length;
 
-		for(var i = 0, l = chars.length; i < l; i++){
-			retval.push(chars.charCodeAt(i));
+		if(l > 0){
+			for(var i = 0; i < l; i++){
+				retval.push(chars.charCodeAt(i));
+			}
 		}
 
 		return retval;
@@ -151,10 +156,13 @@ body {
 
 	var getSingleUnicodeValues = function(){
 		var unicodes = $('#single-chars-unicode').val().split(','),
-			retval = [];
+			retval = [],
+			l = unicodes.length;
 
-		for(var i = 0, l = unicodes.length; i < l; i++){
-			retval.push(unicodeStrToNumber(unicodes[i]));
+		for(var i = 0; i < l; i++){
+			if(regexpUnicode.test(unicodes[i])){
+				retval.push(unicodeStrToNumber(unicodes[i]));
+			}
 		}
 
 		return retval;
