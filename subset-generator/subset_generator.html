@@ -2,6 +2,13 @@
 <html>
 <head>
 <style type="text/css">
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -9,8 +16,36 @@ body {
 	background: #eee;
 }
 
+fieldset {
+	clear: both;
+}
+
 .unicode-range:first-child .btn-remove {
 	display: none;
+}
+
+#subset-preview {
+	float: left;
+	padding: 10px;
+	width: 100%;
+	max-width: 700px;
+}
+
+#subset-preview span {
+	display: block;
+	float: left;
+	margin: 2px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #555;
+}
+
+#btn-generate {
+	display: block;
+	clear: both;
 }
 </style>
 <title>Subset generator</title>
@@ -46,7 +81,7 @@ body {
 </fieldset>
 
 <p>Preview:</p>
-<div id="subset_preview">
+<div id="subset-preview">
 </div>
 
 <button id="btn-generate">Generate</button>
@@ -179,7 +214,7 @@ body {
 			html += '<span>&#' + zeroFill(chars[i], 4) + ';</span>';
 		}
 
-		$('#subset_preview').html(html);
+		$('#subset-preview').html(html);
 	};
 
 	var getInfo = function(){
@@ -247,8 +282,12 @@ body {
 		mergedArr = mergedArr.concat(ranges);
 		mergedArr = mergedArr.concat(singleChars);
 		mergedArr = mergedArr.concat(singleUnicodeValues);
-		mergedArr = mergedArr.sort();
 		mergedArr = _.unique(mergedArr);
+		mergedArr = mergedArr.sort(function(a, b){
+			return a - b;
+		});
+
+		generatePreview(mergedArr);
 
 		subsetFile += getInfo();
 		subsetFile += arrayToSubset(mergedArr);
