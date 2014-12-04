@@ -18,6 +18,8 @@ Included tools:
 
 ## Usage
 
+Warning(on win8 or newer): you have to run this as administrator!
+
 ```
 ffgen filename [--fontname <css font-family name>] [--subset <predefined subset name or subset file>]
 ```
